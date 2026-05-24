@@ -1,0 +1,27 @@
+{
+  "name": "单词记忆 - PWA单词工具",
+  "short_name": "单词记忆",
+  "description": "一款支持离线使用的渐进式网页单词记忆工具",
+  "start_url": ".",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#F0F2F5",
+  "theme_color": "#4A90D9",
+  "lang": "zh-CN",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "productivity"],
+  "prefer_related_applications": false
+}

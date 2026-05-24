@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#4A90D9">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="单词记忆">
+  <meta name="description" content="一款支持离线使用的渐进式单词记忆工具">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <link rel="stylesheet" href="style.css">
+  <title>单词记忆</title>
+</head>
+<body>
+  <div id="app">
+    <!-- Header -->
+    <header id="header">
+      <h1 class="app-title">单词记忆</h1>
+      <div id="countdown" class="countdown" role="button" tabindex="0" title="点击设置目标日期">
+        <span class="countdown-label">点击设置目标日期</span>
+        <span class="countdown-days"></span>
+      </div>
+      <button id="settings-toggle" class="icon-btn" title="设置" aria-label="打开设置">&#9881;</button>
+    </header>
+
+    <!-- Toast container -->
+    <div id="toast" class="toast" aria-live="polite"></div>
+
+    <!-- Main content -->
+    <main id="main-content">
+      <!-- Column header -->
+      <div class="table-header">
+        <div class="col-header col-chinese-header">
+          <span class="col-label">中文</span>
+          <button class="hide-col-btn icon-btn-sm" data-col="chinese" title="隐藏中文栏" aria-label="切换中文栏显示">&#128065;</button>
+        </div>
+        <div class="col-divider"></div>
+        <div class="col-header col-english-header">
+          <span class="col-label">英文</span>
+          <button class="hide-col-btn icon-btn-sm" data-col="english" title="隐藏英文栏" aria-label="切换英文栏显示">&#128065;</button>
+        </div>
+      </div>
+
+      <!-- Word list -->
+      <div id="word-list" class="word-list"></div>
+
+      <!-- Add word button -->
+      <button id="add-word-btn" class="add-word-btn">+ 添加单词</button>
+    </main>
+
+    <!-- Mode bar -->
+    <nav id="mode-bar" class="mode-bar">
+      <button class="mode-btn active" data-mode="browse">浏览模式</button>
+      <button class="mode-btn" data-mode="cn2en">中译英拼写</button>
+      <button class="mode-btn" data-mode="en2cn">英译中</button>
+    </nav>
+  </div>
+
+  <!-- Settings overlay -->
+  <div id="settings-overlay" class="overlay hidden">
+    <div id="settings-panel" class="settings-panel">
+      <div class="settings-header">
+        <h2>设置</h2>
+        <button id="settings-close" class="icon-btn" aria-label="关闭设置">&times;</button>
+      </div>
+      <div class="settings-body">
+        <div class="setting-group">
+          <label class="setting-label">目标日期</label>
+          <input type="date" id="target-date-input" class="date-input">
+        </div>
+        <div class="setting-group">
+          <label class="setting-label">行间距</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="rowSpacing" value="compact"> 紧凑</label>
+            <label class="radio-item"><input type="radio" name="rowSpacing" value="normal" checked> 标准</label>
+            <label class="radio-item"><input type="radio" name="rowSpacing" value="loose"> 宽松</label>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label class="setting-label">字号</label>
+          <div class="radio-group">
+            <label class="radio-item"><input type="radio" name="fontSize" value="small"> 小</label>
+            <label class="radio-item"><input type="radio" name="fontSize" value="medium" checked> 中</label>
+            <label class="radio-item"><input type="radio" name="fontSize" value="large"> 大</label>
+          </div>
+        </div>
+        <div class="setting-group">
+          <label class="setting-label">数据管理</label>
+          <button id="export-data-btn" class="secondary-btn">导出数据</button>
+          <button id="import-data-btn" class="secondary-btn">导入数据</button>
+          <button id="clear-data-btn" class="danger-btn">清除所有数据</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Date picker overlay for countdown -->
+  <div id="date-picker-overlay" class="overlay hidden">
+    <div class="dialog">
+      <h3>设置目标日期</h3>
+      <input type="date" id="countdown-date-input" class="date-input">
+      <div class="dialog-actions">
+        <button id="date-picker-cancel" class="secondary-btn">取消</button>
+        <button id="date-picker-confirm" class="primary-btn">确认</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden file input for import -->
+  <input type="file" id="import-file-input" accept=".json" class="hidden-file-input">
+
+  <script src="app.js"></script>
+</body>
+</html>
